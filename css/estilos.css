@@ -1,0 +1,656 @@
+/* =========================================================
+   ESTILOS DE LA PASTELERÍA
+   Una sola hoja de estilos para todas las páginas.
+   Solo CSS: sin animaciones y sin JavaScript.
+   ========================================================= */
+
+/* ---------- 1. Colores (variables) ---------- */
+:root {
+  --azul-oscuro: #1F3864;   /* cabecera y títulos */
+  --azul-medio: #2E5496;    /* botones y menú activo */
+  --naranja: #C55A11;       /* precios, totales y rol */
+  --verde: #548235;         /* botón agregar al carrito */
+  --rojo: #C00000;          /* cancelar y agotado */
+  --fondo: #F4F6F9;         /* fondo de la página */
+  --gris-claro: #EDEFF3;    /* encabezados de tabla */
+  --gris: #667085;          /* textos secundarios */
+  --borde: #C9CDD4;
+  --blanco: #FFFFFF;
+}
+
+/* ---------- 2. Base ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: #222;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--azul-medio);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--azul-oscuro);
+}
+
+h2 {
+  margin-bottom: 4px;
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+/* ---------- 3. Cabecera y menú ---------- */
+.cabecera {
+  background: var(--azul-oscuro);
+  color: var(--blanco);
+  padding: 14px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.logo h1 {
+  color: var(--blanco);
+  font-size: 22px;
+}
+
+.logo p {
+  font-size: 12px;
+  color: #A9BCE0;
+}
+
+/* Etiqueta que indica con qué rol se ingresó */
+.rol {
+  display: inline-block;
+  background: var(--naranja);
+  color: var(--blanco);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.menu a {
+  color: #C6D3EA;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.menu a:hover {
+  background: var(--azul-medio);
+  color: var(--blanco);
+}
+
+/* Opción del menú de la página actual */
+.menu a.activo {
+  background: var(--azul-medio);
+  color: var(--blanco);
+}
+
+.menu a.salir {
+  border: 1px solid #C6D3EA;
+}
+
+/* ---------- 4. Contenido y pie ---------- */
+.contenido {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.titulo-seccion {
+  margin-bottom: 20px;
+}
+
+.titulo-seccion p {
+  color: var(--gris);
+}
+
+.pie {
+  background: #16294A;
+  color: #C6D3EA;
+  text-align: center;
+  font-size: 13px;
+  padding: 18px 16px;
+  margin-top: 30px;
+}
+
+.pie a {
+  color: #C6D3EA;
+}
+
+/* Caja blanca genérica */
+.tarjeta {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+/* Nota con la regla de negocio que cumple la pantalla */
+.nota-rn {
+  font-size: 12px;
+  color: var(--gris);
+  margin-top: 10px;
+}
+
+/* Mensaje destacado (éxito o advertencia) */
+.aviso {
+  background: #FFF7E0;
+  border-left: 4px solid #E5C158;
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* Aviso dentro de una caja, o debajo de una fila de tarjetas */
+.tarjeta .aviso {
+  margin: 10px 0 0;
+}
+
+.accesos + .aviso {
+  margin-top: 20px;
+}
+
+/* ---------- 5. Dos columnas ---------- */
+.dos-columnas {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+/* Contenido de cada pedido desplegable en "Mis pedidos" */
+details .dos-columnas {
+  margin-top: 12px;
+}
+
+/* Formulario de una sola columna, no muy ancho */
+.form-angosto {
+  max-width: 600px;
+}
+
+/* ---------- 6. Formularios ---------- */
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 13px;
+  color: var(--gris);
+  margin: 10px 0 4px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--blanco);
+}
+
+/* Los radios no ocupan todo el ancho */
+input[type="radio"] {
+  width: auto;
+  margin-right: 6px;
+}
+
+.opcion {
+  display: block;
+  font-weight: normal;
+  color: #222;
+}
+
+/* Formulario pequeño en una sola fila (filtros, cantidades) */
+.form-linea {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.form-linea label {
+  margin-top: 0;
+}
+
+.form-linea input,
+.form-linea select {
+  width: auto;
+}
+
+/* ---------- 7. Botones ---------- */
+.boton,
+button {
+  display: inline-block;
+  background: var(--azul-medio);
+  color: var(--blanco);
+  border: none;
+  border-radius: 6px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.boton:hover,
+button:hover {
+  background: var(--azul-oscuro);
+}
+
+.boton-secundario {
+  background: var(--blanco);
+  color: var(--azul-oscuro);
+  border: 1px solid var(--borde);
+}
+
+.boton-secundario:hover {
+  background: var(--gris-claro);
+}
+
+.boton-peligro {
+  background: var(--rojo);
+}
+
+.boton-peligro:hover {
+  background: #8E0000;
+}
+
+/* Botón pequeño con ícono (papelera del carrito) */
+.boton-icono {
+  background: var(--blanco);
+  border: 1px solid var(--rojo);
+  color: var(--rojo);
+  padding: 4px 10px;
+  font-size: 16px;
+}
+
+.boton-icono:hover {
+  background: #FADBD8;
+}
+
+/* Mensaje de confirmación que escribe el JavaScript (vacío = no se ve) */
+.mensaje {
+  color: var(--verde);
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+/* Mensaje de error que escribe el JavaScript (vacío = no se ve) */
+.error {
+  color: var(--rojo);
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.boton-ancho {
+  width: 100%;
+  margin-top: 14px;
+  text-align: center;
+}
+
+button:disabled {
+  background: #BDBDBD;
+  cursor: not-allowed;
+}
+
+/* ---------- 8. Tablas ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--blanco);
+}
+
+th,
+td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #EEF1F5;
+  font-size: 14px;
+}
+
+th {
+  background: var(--gris-claro);
+  color: #3A3A3A;
+}
+
+.derecha {
+  text-align: right;
+}
+
+/* Texto que va justo debajo de una tabla */
+table + p {
+  margin-top: 10px;
+}
+
+/* Campos numéricos dentro de una tabla (cantidades, precio, stock) */
+td input[type="number"] {
+  width: 90px;
+}
+
+/* Teléfono y lista de roles dentro de una tabla: solo el ancho necesario */
+td input[type="tel"] {
+  width: 120px;
+}
+
+td select {
+  width: auto;
+}
+
+td input[type="email"] {
+  min-width: 270px;
+}
+
+/* Título de una tabla con un botón a la derecha */
+.encabezado-tabla {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Botones de una fila de tabla, uno al lado del otro */
+.acciones {
+  white-space: nowrap;
+}
+
+.acciones form {
+  display: inline;
+}
+
+/* Fila de totales */
+.total td {
+  font-weight: bold;
+  font-size: 16px;
+  color: var(--naranja);
+}
+
+/* ---------- 9. Estados del pedido (RN-20) ---------- */
+.estado {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.recibido       { background: #EDEFF3; color: #444; }
+.en-preparacion { background: #DDEBF7; color: var(--azul-medio); }
+.listo          { background: #E2EFDA; color: var(--verde); }
+.asignado       { background: #FCE4D6; color: var(--naranja); }
+.en-camino      { background: #FCE4D6; color: var(--naranja); }
+.entregado      { background: #D9EAD3; color: #345621; }
+.cancelado      { background: #FADBD8; color: var(--rojo); }
+
+/* Estado activo / inactivo de un producto */
+.activo-txt   { color: var(--verde); font-weight: bold; }
+.inactivo-txt { color: var(--rojo); font-weight: bold; }
+
+/* ---------- 10. Catálogo del cliente ---------- */
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.producto {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+/* El botón "Agregar" del catálogo va en verde */
+.producto button {
+  background: var(--verde);
+}
+
+/* Producto sin stock: botón gris y desactivado */
+.producto button:disabled {
+  background: #BDBDBD;
+}
+
+/* Venta en mostrador: tarjetas más chicas para ver más productos a la vez */
+.compacto {
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+  gap: 12px;
+}
+
+.compacto .foto {
+  height: 110px;
+}
+
+/* Foto real del producto: llena el recuadro sin deformarse */
+img.foto {
+  width: 100%;
+  object-fit: cover;
+  border: none;
+  display: block;
+}
+
+/* Panel que se queda visible al bajar por la página */
+.fijo {
+  position: sticky;
+  top: 16px;
+  align-self: start;
+}
+
+/* Recuadro que reemplaza a la foto del producto */
+.foto {
+  background: #EEF1F5;
+  border: 1px dashed var(--borde);
+  height: 110px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A5ABB3;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.categoria {
+  font-size: 12px;
+  color: var(--gris);
+}
+
+.precio {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--naranja);
+}
+
+.stock {
+  font-size: 13px;
+  color: var(--gris);
+  margin-bottom: 8px;
+}
+
+.agotado {
+  color: var(--rojo);
+  font-weight: bold;
+}
+
+.producto input[type="number"] {
+  width: 70px;
+}
+
+/* ---------- 11. Tarjetas de indicadores (KPI) ---------- */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.kpi {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-top: 4px solid var(--azul-medio);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.kpi span {
+  font-size: 13px;
+  color: var(--gris);
+}
+
+.kpi strong {
+  display: block;
+  font-size: 24px;
+  color: var(--azul-oscuro);
+}
+
+/* ---------- 12. Gráficos de barras hechos solo con CSS ----------
+   Cada barra es un <div> cuyo ancho (width) se escribe en el HTML
+   como porcentaje del valor más alto de la serie.                 */
+.grafico .fila {
+  display: grid;
+  grid-template-columns: 50px 1fr 70px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.fondo-barra {
+  background: #EEF1F5;
+  border-radius: 4px;
+  height: 16px;
+}
+
+.barra {
+  background: var(--azul-medio);
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* ---------- 13. Línea de tiempo del seguimiento ---------- */
+.linea-tiempo {
+  list-style: none;
+  border-left: 3px solid var(--borde);
+  margin: 10px 0 10px 8px;
+  padding-left: 16px;
+}
+
+.linea-tiempo li {
+  margin-bottom: 8px;
+  color: var(--gris);
+}
+
+/* Paso ya cumplido */
+.linea-tiempo li.hecho {
+  color: var(--naranja);
+  font-weight: bold;
+}
+
+/* Pedido desplegable en "Mis pedidos" (etiqueta <details> de HTML) */
+details {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--azul-oscuro);
+}
+
+/* ---------- 14. Página de inicio y login ---------- */
+.fondo-acceso {
+  background: var(--fondo);
+  min-height: 100vh;
+}
+
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.acceso {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.acceso p {
+  color: var(--gris);
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.caja-login {
+  max-width: 420px;
+  margin: 40px auto;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 26px;
+}
+
+.volver {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 14px;
+}
+
+/* ---------- 15. Promociones y contacto ---------- */
+.promo {
+  background: #FCE4D6;
+  border: 1px solid var(--naranja);
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.promo .descuento {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--naranja);
+}
+
+/* ---------- 16. Pantallas pequeñas (celular) ---------- */
+@media (max-width: 700px) {
+  .dos-columnas {
+    grid-template-columns: 1fr;
+  }
+
+  .cabecera {
+    padding: 12px 16px;
+  }
+
+  /* Las tablas anchas se desplazan dentro de su caja */
+  .tabla-scroll {
+    overflow-x: auto;
+  }
+}

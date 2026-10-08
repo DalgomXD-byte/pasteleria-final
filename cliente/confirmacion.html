@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Pedido confirmado</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cliente</span></h1>
+      <p>Hola, Ana Ríos</p>
+    </div>
+    <nav class="menu">
+      <a href="catalogo.html">Catálogo</a>
+      <a href="carrito.html">Carrito (<span id="contador">0</span>)</a>
+      <a href="mis-pedidos.html">Mis pedidos</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- Parte de I3: resultado del checkout (funcionalidad 9: pedido guardado y código de seguimiento) -->
+  <main class="contenido">
+    <p id="sin-pedido" class="aviso">Todavía no has confirmado ningún pedido. <a href="catalogo.html">Ir al catálogo</a>.</p>
+
+    <!-- carrito.js llena esta parte con el pedido que se acaba de confirmar -->
+    <div id="resumen" hidden>
+      <section class="aviso">
+        <h2>¡Pedido confirmado!</h2>
+        <p>Tu código de seguimiento es <strong id="codigo"></strong>. Guárdalo para consultar tu pedido.</p>
+      </section>
+
+      <section class="tarjeta form-angosto">
+        <h3>Resumen del pedido</h3>
+        <table>
+          <tbody id="productos"></tbody>
+          <tr class="total"><td>Total (IGV incluido)</td><td class="derecha" id="total"></td></tr>
+        </table>
+        <p><strong>Entrega:</strong> <span id="entrega"></span></p>
+        <p><strong>Pago:</strong> <span id="pago"></span></p>
+        <p><strong>Estado:</strong> <span class="estado recibido">RECIBIDO</span></p>
+        <p class="nota-rn">RN-18 el código de seguimiento lo genera el sistema y es único.</p>
+      </section>
+
+      <a href="mis-pedidos.html" class="boton">Ver mis pedidos</a>
+      <a href="catalogo.html" class="boton boton-secundario">Volver al catálogo</a>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Calle Real 845, Huancayo · (064) 000-000</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script>mostrarConfirmacion();</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Acceso del administrador</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="fondo-acceso">
+
+  <!-- I1 Login del ADMINISTRADOR (funcionalidad 2). La cuenta del dueño es fija -->
+  <main class="caja-login">
+    <h2>Acceso del administrador</h2>
+    <p class="nota-rn">Ingresa con tu cuenta del personal.</p>
+
+    <form action="panel.html" method="get">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" required placeholder="admin@dulcemantaro.pe">
+
+      <label for="clave">Contraseña</label>
+      <input type="password" id="clave" required>
+
+      <button type="submit" class="boton-ancho">Ingresar</button>
+    </form>
+
+    <p class="nota-rn">RN-05 el rol ADMINISTRADOR tiene acceso a todas las pantallas del personal.</p>
+    <a href="../index.html" class="volver">&larr; Volver al inicio</a>
+  </main>
+
+</body>
+</html>

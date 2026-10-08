@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Acceso de clientes</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body class="fondo-acceso">
+
+  <!-- I1 Login / Registro del CLIENTE (funcionalidades 1 y 2) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Acceso de clientes</h2>
+      <p>Inicia sesión si ya tienes cuenta, o crea una nueva para comprar.</p>
+    </section>
+
+    <div class="accesos">
+      <!-- Funcionalidad 2: autenticar al cliente y llevarlo a su catálogo -->
+      <section class="tarjeta">
+        <h3>Iniciar sesión</h3>
+        <form action="catalogo.html" method="get">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" required placeholder="ana.rios@gmail.com">
+
+          <label for="clave">Contraseña</label>
+          <input type="password" id="clave" required>
+
+          <button type="submit" class="boton-ancho">Ingresar</button>
+        </form>
+      </section>
+
+      <!-- Funcionalidad 1: registrar una cuenta de cliente -->
+      <section class="tarjeta">
+        <h3>Crear cuenta</h3>
+        <form action="catalogo.html" method="get">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Ana María Ríos Ticse">
+
+          <label for="correo-nuevo">Correo electrónico</label>
+          <input type="email" id="correo-nuevo" name="correo" required>
+
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{9}" placeholder="9 dígitos">
+
+          <label for="clave-nueva">Contraseña</label>
+          <input type="password" id="clave-nueva" required minlength="8">
+
+          <button type="submit" class="boton-ancho">Crear cuenta</button>
+        </form>
+      </section>
+    </div>
+
+    <p class="nota-rn">
+      RN-01 solo ingresan cuentas activas · RN-02 bloqueo tras 5 intentos fallidos ·
+      RN-03 contraseña cifrada con BCrypt · RN-04 el correo no puede repetirse.
+    </p>
+
+    <a href="../index.html" class="volver">&larr; Volver al inicio</a>
+  </main>
+
+</body>
+</html>

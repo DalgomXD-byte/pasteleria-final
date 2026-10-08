@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Gestión de catálogo</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html">Panel de control</a>
+      <a href="catalogo.html" class="activo">Catálogo</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I6 Gestión de catálogo (funcionalidades 3 a 7) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Gestión de catálogo</h2>
+      <p>Categorías y productos que ve el cliente en la tienda.</p>
+    </section>
+
+    <p id="mensaje" class="mensaje"></p>
+
+    <!-- Productos: cada fila se edita aquí mismo (funcionalidad 6).
+         El atributo form="editar-CODIGO" une los campos de la fila con SU botón Guardar. -->
+    <section class="tarjeta tabla-scroll">
+      <div class="encabezado-tabla">
+        <h3>Productos</h3>
+        <a href="producto-nuevo.html" class="boton">+ Nuevo producto</a>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Precio (S/)</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr>
+        </thead>
+        <!-- admin.js dibuja aquí una fila por producto -->
+        <tbody id="filas"></tbody>
+      </table>
+      <p class="nota-rn">
+        RN-06 el código no se puede cambiar · RN-07 el precio es mayor que cero · RN-09 los productos no se borran, se inactivan ·
+        RN-15 un cambio de precio no afecta a los pedidos ya confirmados.
+      </p>
+    </section>
+
+    <!-- Categorías (funcionalidad 4) -->
+    <div class="dos-columnas">
+      <section class="tarjeta">
+        <h3>Categorías</h3>
+        <table>
+          <thead><tr><th>Nombre</th><th>Descripción</th><th>Productos</th></tr></thead>
+          <tbody id="categorias"></tbody>
+        </table>
+      </section>
+
+      <section class="tarjeta">
+        <h3>Nueva categoría</h3>
+        <form onsubmit="nuevaCategoria(event)">
+          <label for="cat-nombre">Nombre</label>
+          <input type="text" id="cat-nombre" name="nombre" required placeholder="Ej. Galletas">
+
+          <label for="cat-descripcion">Descripción</label>
+          <input type="text" id="cat-descripcion" name="descripcion">
+
+          <button type="submit" class="boton-ancho">Guardar categoría</button>
+        </form>
+        <p class="nota-rn">El nombre de la categoría no puede repetirse.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>mostrarCatalogoAdmin();</script>
+</body>
+</html>

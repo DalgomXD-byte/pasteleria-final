@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Bandeja de pedidos</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cajero</span></h1>
+      <p>Carmen Lazo</p>
+    </div>
+    <nav class="menu">
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="pedidos.html" class="activo">Bandeja de pedidos</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I7 Gestión de pedidos (funcionalidades 12, 13 y 14) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Bandeja de pedidos</h2>
+      <p>Verifica el pago, prepara el pedido y, cuando esté listo, asígnale un repartidor.</p>
+    </section>
+
+    <section class="kpis">
+      <div class="kpi"><span>Recibidos</span><strong id="kpi-recibidos">0</strong></div>
+      <div class="kpi"><span>En preparación</span><strong id="kpi-preparacion">0</strong></div>
+      <div class="kpi"><span>Listos para delivery</span><strong id="kpi-listos">0</strong></div>
+      <div class="kpi"><span>Cancelados</span><strong id="kpi-cancelados">0</strong></div>
+    </section>
+
+    <!-- Funcionalidad 12: al cambiar el estado, la tabla se filtra al instante -->
+    <section class="tarjeta form-linea">
+      <div>
+        <label for="filtro-estado">Mostrar</label>
+        <select id="filtro-estado" onchange="mostrarBandeja()">
+          <option value="TODOS">Todos</option>
+          <option value="RECIBIDO">Recibidos</option>
+          <option value="EN_PREPARACION">En preparación</option>
+          <option value="LISTO">Listos</option>
+          <option value="ASIGNADO">Asignados</option>
+          <option value="EN_CAMINO">En camino</option>
+          <option value="ENTREGADO">Entregados</option>
+          <option value="CANCELADO">Cancelados</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="tabla-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Código</th><th>Cliente</th><th>Llegada</th><th>Pago</th>
+            <th>Cód. operación</th><th>Total</th><th>Estado</th><th>Acción</th>
+          </tr>
+        </thead>
+        <!-- pedidos.js dibuja aquí una fila por pedido -->
+        <tbody id="filas"></tbody>
+      </table>
+    </section>
+
+    <p class="nota-rn">RN-20 los estados solo avanzan · RN-21 cancelar exige motivo y devuelve el stock.</p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/pedidos.js"></script>
+  <script>mostrarBandeja();</script>
+</body>
+</html>

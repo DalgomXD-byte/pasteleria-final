@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Venta registrada</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html">Panel de control</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="venta.html" class="activo">Venta en mostrador</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- Parte de I10: ticket de la venta registrada (funcionalidad 22) -->
+  <main class="contenido">
+    <p id="sin-venta" class="aviso">Todavía no se registró ninguna venta. <a href="venta.html">Ir a venta en mostrador</a>.</p>
+
+    <!-- venta.js llena esta parte con la venta que se acaba de registrar -->
+    <div id="ticket" hidden>
+      <section class="aviso">
+        <h2>Venta registrada</h2>
+        <p>Código <strong id="codigo"></strong> · canal MOSTRADOR · <span class="estado entregado">ENTREGADO</span></p>
+      </section>
+
+      <section class="tarjeta form-angosto">
+        <h3>Ticket de venta</h3>
+        <p><span id="fecha"></span> · Atendió: Administrador</p>
+        <table>
+          <thead><tr><th>Producto</th><th>Cant.</th><th class="derecha">Importe</th></tr></thead>
+          <tbody id="filas"></tbody>
+          <tr class="total"><td colspan="2">Total</td><td class="derecha" id="total"></td></tr>
+          <tr><td colspan="2">IGV incluido (18 %)</td><td class="derecha" id="igv"></td></tr>
+          <tbody id="pago"></tbody>
+        </table>
+        <p class="nota-rn">El stock de cada producto ya se descontó (RN-16) y la venta queda ENTREGADA (RN-26).</p>
+      </section>
+
+      <a href="venta.html" class="boton">Nueva venta</a>
+      <a href="pedidos.html" class="boton boton-secundario">Ir a la bandeja de pedidos</a>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/venta.js"></script>
+  <script>mostrarTicket();</script>
+</body>
+</html>

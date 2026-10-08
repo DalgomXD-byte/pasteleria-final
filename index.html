@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Inicio</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body class="fondo-acceso">
+
+  <!-- Menú público: lo ve cualquier persona sin iniciar sesión -->
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro</h1>
+      <p>Pastelería · Huancayo — Junín</p>
+    </div>
+    <nav class="menu">
+      <a href="index.html" class="activo">Inicio</a>
+      <a href="promociones.html">Promociones</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Bienvenido a nuestra tienda en línea</h2>
+      <p>Elige tu tipo de cuenta para ingresar. Cada cuenta tiene sus propias pantallas.</p>
+    </section>
+
+    <!-- Un acceso por cada rol del sistema (RN-05) -->
+    <section class="accesos">
+      <article class="acceso">
+        <h3>Cliente</h3>
+        <p>Compra en el catálogo, arma tu carrito y sigue tu pedido.</p>
+        <a href="cliente/login.html" class="boton">Ingresar como cliente</a>
+      </article>
+
+      <article class="acceso">
+        <h3>Cajero</h3>
+        <p>Vende en el mostrador, atiende los pedidos web y asigna el delivery.</p>
+        <a href="cajero/login.html" class="boton">Ingresar como cajero</a>
+      </article>
+
+      <article class="acceso">
+        <h3>Repartidor</h3>
+        <p>Consulta tus entregas asignadas y actualiza su estado.</p>
+        <a href="repartidor/login.html" class="boton">Ingresar como repartidor</a>
+      </article>
+
+      <article class="acceso">
+        <h3>Administrador</h3>
+        <p>Acceso total: métricas, catálogo, pedidos, delivery y usuarios.</p>
+        <a href="admin/login.html" class="boton">Ingresar como administrador</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Calle Real 845, Huancayo · (064) 000-000</p>
+    <p><a href="index.html" onclick="reiniciarDemo(); return false;">Restablecer datos de ejemplo</a></p>
+  </footer>
+
+  <script src="js/datos.js"></script>
+</body>
+</html>

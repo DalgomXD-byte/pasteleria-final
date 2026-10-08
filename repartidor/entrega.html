@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Detalle de entrega</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Repartidor</span></h1>
+      <p>Jorge Mendoza</p>
+    </div>
+    <nav class="menu">
+      <a href="mis-entregas.html" class="activo">Mis entregas</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- Parte de I8: detalle de una entrega asignada (funcionalidad 17) -->
+  <main class="contenido">
+    <p id="no-encontrado" class="aviso">No se encontró la entrega. <a href="mis-entregas.html">Volver a mis entregas</a>.</p>
+
+    <!-- pedidos.js llena esta parte con la entrega de la dirección (?codigo=PAS-...) -->
+    <div id="detalle" hidden>
+      <section class="titulo-seccion">
+        <h2 id="titulo"></h2>
+      </section>
+
+      <div class="dos-columnas">
+        <div>
+          <section class="tarjeta">
+            <h3>Datos de entrega</h3>
+            <p><strong>Cliente:</strong> <span id="cliente"></span></p>
+            <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
+            <p><strong>Dirección:</strong> <span id="direccion"></span></p>
+            <p><strong>Referencia:</strong> <span id="referencia"></span></p>
+          </section>
+
+          <section class="tarjeta">
+            <h3>Productos a entregar</h3>
+            <table>
+              <thead><tr><th>Producto</th><th>Cantidad</th></tr></thead>
+              <tbody id="productos"></tbody>
+            </table>
+          </section>
+
+          <p id="cobro" class="aviso"></p>
+        </div>
+
+        <aside>
+          <!-- Se ven todos los estados; solo se eligen los siguientes (RN-20) -->
+          <section class="tarjeta">
+            <h3>Actualizar estado</h3>
+            <form id="form-estado" onsubmit="guardarEntrega(event)">
+              <p><strong>Pasar a</strong></p>
+              <div id="lista-estados"></div>
+              <button type="submit" class="boton-ancho">Guardar estado</button>
+              <p class="nota-rn">El estado solo avanza. En gris: los que no le tocan al repartidor.</p>
+            </form>
+            <p id="sin-cambios" class="aviso" hidden>Esta entrega ya está completada.</p>
+          </section>
+
+          <section class="tarjeta">
+            <h3>Historial</h3>
+            <ol id="historial" class="linea-tiempo"></ol>
+          </section>
+
+          <a href="mis-entregas.html" class="volver">&larr; Volver a mis entregas</a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/pedidos.js"></script>
+  <script>mostrarEntrega();</script>
+</body>
+</html>

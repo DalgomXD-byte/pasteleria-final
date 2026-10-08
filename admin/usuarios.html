@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Cuentas del personal</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html">Panel de control</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="usuarios.html" class="activo">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I9 Gestión de usuarios del personal (funcionalidades 19, 20 y 21) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Cuentas del personal</h2>
+      <p>El administrador crea y mantiene las cuentas del cajero y de los repartidores.</p>
+    </section>
+
+    <p id="mensaje" class="mensaje"></p>
+
+    <!-- Cada fila se edita aquí mismo (funcionalidad 20).
+         El atributo form="usuario-N" une los campos de la fila con SU botón Guardar. -->
+    <section class="tarjeta tabla-scroll">
+      <h3>Personal registrado</h3>
+      <table>
+        <thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <!-- admin.js dibuja aquí una fila por cuenta -->
+        <tbody id="filas"></tbody>
+      </table>
+      <p class="nota-rn">
+        RN-04 el correo no puede repetirse · RN-05 el rol define qué pantallas puede usar ·
+        RN-01 una cuenta desactivada no se borra y deja de estar disponible.
+      </p>
+    </section>
+
+    <!-- Funcionalidad 19: registrar una cuenta del personal -->
+    <form class="tarjeta form-angosto" onsubmit="crearUsuario(event)">
+      <h3>Nueva cuenta del personal</h3>
+
+      <label for="nombre">Nombre completo *</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="dni">DNI *</label>
+      <input type="text" id="dni" name="dni" required pattern="[0-9]{8}" placeholder="8 dígitos">
+
+      <label for="correo">Correo electrónico *</label>
+      <input type="email" id="correo" name="correo" required placeholder="nombre@dulcemantaro.pe">
+
+      <label for="telefono">Teléfono *</label>
+      <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{9}" placeholder="9 dígitos">
+
+      <label for="rol">Rol *</label>
+      <select id="rol" name="rol" required>
+        <option value="">— Elige un rol —</option>
+        <option>Cajero</option>
+        <option>Repartidor</option>
+      </select>
+
+      <label for="clave">Contraseña inicial *</label>
+      <input type="password" id="clave" required minlength="8">
+
+      <button type="submit" class="boton-ancho">Crear cuenta</button>
+      <p class="nota-rn">RN-03 la contraseña se guarda cifrada con BCrypt (en el backend).</p>
+    </form>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>mostrarUsuarios();</script>
+</body>
+</html>

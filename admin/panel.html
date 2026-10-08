@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Panel de control</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <!-- Menú del ADMINISTRADOR: tiene acceso a todo -->
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html" class="activo">Panel de control</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I5 Panel de control (funcionalidad 18) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Panel de control</h2>
+      <p>Las cinco métricas del negocio, del 22/09 al 28/09/2026.</p>
+    </section>
+
+    <!-- Rango de fechas de las métricas -->
+    <form class="tarjeta form-linea" action="panel.html" method="get">
+      <div>
+        <label for="desde">Desde</label>
+        <input type="date" id="desde" name="desde" value="2026-09-22">
+      </div>
+      <div>
+        <label for="hasta">Hasta</label>
+        <input type="date" id="hasta" name="hasta" value="2026-09-28">
+      </div>
+      <button type="submit">Consultar</button>
+    </form>
+
+    <!-- Totales de la semana -->
+    <section class="kpis">
+      <div class="kpi"><span>Ventas</span><strong>S/ 3,630</strong></div>
+      <div class="kpi"><span>Pedidos</span><strong>76</strong></div>
+      <div class="kpi"><span>Entregas</span><strong>68</strong></div>
+      <div class="kpi"><span>Ticket promedio</span><strong>S/ 47.76</strong></div>
+      <div class="kpi"><span>Unidades</span><strong>259</strong></div>
+    </section>
+
+    <!-- Gráficos de barras hechos con CSS: el "width" es el % respecto al valor más alto -->
+    <div class="accesos">
+      <section class="tarjeta grafico">
+        <h3>1. Ventas diarias (S/)</h3>
+        <div class="fila"><span>22/09</span><div class="fondo-barra"><div class="barra" style="width:51%"></div></div><span>420</span></div>
+        <div class="fila"><span>23/09</span><div class="fondo-barra"><div class="barra" style="width:46%"></div></div><span>380</span></div>
+        <div class="fila"><span>24/09</span><div class="fondo-barra"><div class="barra" style="width:62%"></div></div><span>510</span></div>
+        <div class="fila"><span>25/09</span><div class="fondo-barra"><div class="barra" style="width:56%"></div></div><span>460</span></div>
+        <div class="fila"><span>26/09</span><div class="fondo-barra"><div class="barra" style="width:84%"></div></div><span>690</span></div>
+        <div class="fila"><span>27/09</span><div class="fondo-barra"><div class="barra" style="width:100%"></div></div><span>820</span></div>
+        <div class="fila"><span>28/09</span><div class="fondo-barra"><div class="barra" style="width:43%"></div></div><span>350</span></div>
+      </section>
+
+      <section class="tarjeta grafico">
+        <h3>2. Pedidos por día</h3>
+        <div class="fila"><span>22/09</span><div class="fondo-barra"><div class="barra" style="width:53%"></div></div><span>9</span></div>
+        <div class="fila"><span>23/09</span><div class="fondo-barra"><div class="barra" style="width:47%"></div></div><span>8</span></div>
+        <div class="fila"><span>24/09</span><div class="fondo-barra"><div class="barra" style="width:65%"></div></div><span>11</span></div>
+        <div class="fila"><span>25/09</span><div class="fondo-barra"><div class="barra" style="width:59%"></div></div><span>10</span></div>
+        <div class="fila"><span>26/09</span><div class="fondo-barra"><div class="barra" style="width:82%"></div></div><span>14</span></div>
+        <div class="fila"><span>27/09</span><div class="fondo-barra"><div class="barra" style="width:100%"></div></div><span>17</span></div>
+        <div class="fila"><span>28/09</span><div class="fondo-barra"><div class="barra" style="width:41%"></div></div><span>7</span></div>
+      </section>
+
+      <section class="tarjeta grafico">
+        <h3>3. Entregas completadas por día</h3>
+        <div class="fila"><span>22/09</span><div class="fondo-barra"><div class="barra" style="width:50%"></div></div><span>8</span></div>
+        <div class="fila"><span>23/09</span><div class="fondo-barra"><div class="barra" style="width:50%"></div></div><span>8</span></div>
+        <div class="fila"><span>24/09</span><div class="fondo-barra"><div class="barra" style="width:63%"></div></div><span>10</span></div>
+        <div class="fila"><span>25/09</span><div class="fondo-barra"><div class="barra" style="width:56%"></div></div><span>9</span></div>
+        <div class="fila"><span>26/09</span><div class="fondo-barra"><div class="barra" style="width:81%"></div></div><span>13</span></div>
+        <div class="fila"><span>27/09</span><div class="fondo-barra"><div class="barra" style="width:100%"></div></div><span>16</span></div>
+        <div class="fila"><span>28/09</span><div class="fondo-barra"><div class="barra" style="width:25%"></div></div><span>4</span></div>
+      </section>
+
+      <section class="tarjeta grafico">
+        <h3>4. Ticket promedio diario (S/)</h3>
+        <div class="fila"><span>22/09</span><div class="fondo-barra"><div class="barra" style="width:93%"></div></div><span>46.67</span></div>
+        <div class="fila"><span>23/09</span><div class="fondo-barra"><div class="barra" style="width:95%"></div></div><span>47.50</span></div>
+        <div class="fila"><span>24/09</span><div class="fondo-barra"><div class="barra" style="width:93%"></div></div><span>46.36</span></div>
+        <div class="fila"><span>25/09</span><div class="fondo-barra"><div class="barra" style="width:92%"></div></div><span>46.00</span></div>
+        <div class="fila"><span>26/09</span><div class="fondo-barra"><div class="barra" style="width:99%"></div></div><span>49.29</span></div>
+        <div class="fila"><span>27/09</span><div class="fondo-barra"><div class="barra" style="width:96%"></div></div><span>48.24</span></div>
+        <div class="fila"><span>28/09</span><div class="fondo-barra"><div class="barra" style="width:100%"></div></div><span>50.00</span></div>
+      </section>
+
+      <section class="tarjeta grafico">
+        <h3>5. Unidades vendidas por día</h3>
+        <div class="fila"><span>22/09</span><div class="fondo-barra"><div class="barra" style="width:53%"></div></div><span>31</span></div>
+        <div class="fila"><span>23/09</span><div class="fondo-barra"><div class="barra" style="width:47%"></div></div><span>27</span></div>
+        <div class="fila"><span>24/09</span><div class="fondo-barra"><div class="barra" style="width:66%"></div></div><span>38</span></div>
+        <div class="fila"><span>25/09</span><div class="fondo-barra"><div class="barra" style="width:59%"></div></div><span>34</span></div>
+        <div class="fila"><span>26/09</span><div class="fondo-barra"><div class="barra" style="width:84%"></div></div><span>49</span></div>
+        <div class="fila"><span>27/09</span><div class="fondo-barra"><div class="barra" style="width:100%"></div></div><span>58</span></div>
+        <div class="fila"><span>28/09</span><div class="fondo-barra"><div class="barra" style="width:38%"></div></div><span>22</span></div>
+      </section>
+    </div>
+
+    <p class="nota-rn">RN-24 solo el administrador ve las métricas · RN-25 los pedidos cancelados no se cuentan.</p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+</body>
+</html>

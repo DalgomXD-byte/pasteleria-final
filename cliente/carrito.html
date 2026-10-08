@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Carrito y checkout</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cliente</span></h1>
+      <p>Hola, Ana Ríos</p>
+    </div>
+    <nav class="menu">
+      <a href="catalogo.html">Catálogo</a>
+      <a href="carrito.html" class="activo">Carrito (<span id="contador">0</span>)</a>
+      <a href="mis-pedidos.html">Mis pedidos</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I3 Carrito y Checkout (funcionalidades 8 y 9) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Mi carrito</h2>
+      <p>Revisa tu pedido, indica la dirección de entrega y el medio de pago.</p>
+    </section>
+
+    <!-- Todo el checkout es UN solo formulario; al confirmarlo lo procesa carrito.js -->
+    <form class="dos-columnas" onsubmit="confirmarPedido(event)">
+
+      <!-- Columna izquierda: productos y datos de entrega -->
+      <div>
+        <section class="tarjeta tabla-scroll">
+          <h3>Productos</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th class="derecha">Importe</th>
+                <th></th>
+              </tr>
+            </thead>
+            <!-- carrito.js dibuja aquí una fila por producto -->
+            <tbody id="filas"></tbody>
+          </table>
+          <p id="carrito-vacio" class="aviso" hidden>
+            Tu carrito está vacío. <a href="catalogo.html">Agrega productos desde el catálogo</a>.
+          </p>
+        </section>
+
+        <section class="tarjeta">
+          <h3>Dirección de entrega</h3>
+          <label for="direccion">Dirección</label>
+          <input type="text" id="direccion" name="direccion" required placeholder="Jr. Puno 245">
+
+          <label for="distrito">Distrito</label>
+          <select id="distrito" name="distrito" required>
+            <option value="">— Elige tu distrito —</option>
+            <option>Huancayo</option>
+            <option>El Tambo</option>
+            <option>Chilca</option>
+          </select>
+
+          <label for="referencia">Referencia</label>
+          <input type="text" id="referencia" name="referencia" placeholder="Frente al parque">
+        </section>
+
+        <section class="tarjeta">
+          <h3>Medio de pago</h3>
+          <label class="opcion"><input type="radio" name="pago" value="YAPE" required> Yape</label>
+          <label class="opcion"><input type="radio" name="pago" value="TRANSFERENCIA"> Transferencia bancaria</label>
+          <label class="opcion"><input type="radio" name="pago" value="CONTRAENTREGA"> Pago contraentrega</label>
+
+          <label for="operacion">Código de operación (solo Yape o transferencia)</label>
+          <input type="text" id="operacion" name="operacion" placeholder="Ej. 845120">
+          <p class="nota-rn">RN-17 Yape y transferencia exigen el código de operación; contraentrega no.</p>
+        </section>
+      </div>
+
+      <!-- Columna derecha: total calculado en tiempo real -->
+      <aside class="fijo">
+        <section class="tarjeta">
+          <h3>Resumen</h3>
+          <table>
+            <tr class="total"><td>Total a pagar</td><td class="derecha" id="total">S/ 0.00</td></tr>
+            <tr><td>IGV incluido (18 %)</td><td class="derecha" id="igv">S/ 0.00</td></tr>
+          </table>
+          <p class="nota-rn">Los precios ya incluyen IGV.</p>
+
+          <p id="mensaje" class="error"></p>
+          <button type="submit" id="confirmar" class="boton-ancho">Confirmar pedido</button>
+          <a href="catalogo.html" class="boton boton-secundario boton-ancho">Seguir comprando</a>
+
+          <p class="nota-rn">
+            RN-12 no se pide más que el stock · RN-13 y RN-14 el total se calcula solo ·
+            RN-16 el pedido y el descuento de stock se guardan juntos.
+          </p>
+        </section>
+      </aside>
+    </form>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Calle Real 845, Huancayo · (064) 000-000</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script>mostrarCarrito();</script>
+</body>
+</html>

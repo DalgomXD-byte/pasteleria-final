@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Mis pedidos</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cliente</span></h1>
+      <p>Hola, Ana Ríos</p>
+    </div>
+    <nav class="menu">
+      <a href="catalogo.html">Catálogo</a>
+      <a href="carrito.html">Carrito (<span id="contador">0</span>)</a>
+      <a href="mis-pedidos.html" class="activo">Mis pedidos</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I4 Mis pedidos (funcionalidades 10 y 11) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Mis pedidos</h2>
+      <p>Haz clic en un pedido para ver su detalle y seguimiento.</p>
+    </section>
+
+    <!-- carrito.js dibuja aquí cada pedido con <details>, que se abre y cierra solo -->
+    <div id="lista"></div>
+
+    <p class="nota-rn">RN-19 solo ves tus propios pedidos, nunca los de otro cliente · RN-23 cada cambio de estado guarda su hora.</p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Calle Real 845, Huancayo · (064) 000-000</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script>mostrarMisPedidos();</script>
+</body>
+</html>

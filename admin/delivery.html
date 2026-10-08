@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Delivery</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html">Panel de control</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedidos.html">Pedidos</a>
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="delivery.html" class="activo">Delivery</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I8 Gestión de delivery (funcionalidades 15 y 17) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Delivery</h2>
+      <p>Asigna los pedidos listos a un repartidor y sigue su despacho.</p>
+    </section>
+
+    <!-- Funcionalidad 15: solo los pedidos LISTO se pueden asignar (RN-22) -->
+    <section class="tarjeta tabla-scroll">
+      <h3>Listos para asignar</h3>
+      <table>
+        <thead><tr><th>Código</th><th>Cliente</th><th>Dirección</th><th>Total</th><th>Asignar a</th></tr></thead>
+        <tbody id="listos"></tbody>
+      </table>
+    </section>
+
+    <!-- Funcionalidad 17: pedidos en ruta (el administrador también puede cambiar su estado) -->
+    <section class="tarjeta tabla-scroll">
+      <h3>Pedidos en ruta</h3>
+      <table>
+        <thead><tr><th>Código</th><th>Cliente</th><th>Repartidor</th><th>Asignado</th><th>Estado</th><th>Cambiar estado</th></tr></thead>
+        <tbody id="ruta"></tbody>
+      </table>
+    </section>
+
+    <p class="nota-rn">RN-22 solo se asignan pedidos LISTO · RN-20 el despacho solo avanza · RN-23 cada cambio guarda su hora.</p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/pedidos.js"></script>
+  <script>mostrarDelivery(true);</script>
+</body>
+</html>

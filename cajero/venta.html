@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Venta en mostrador</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cajero</span></h1>
+      <p>Carmen Lazo</p>
+    </div>
+    <nav class="menu">
+      <a href="venta.html" class="activo">Venta en mostrador</a>
+      <a href="pedidos.html">Bandeja de pedidos</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I10 Venta en mostrador (funcionalidad 22) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Venta en mostrador</h2>
+      <p>Para el cliente que compra en el local: escribe la cantidad de cada producto que pide.</p>
+    </section>
+
+    <!-- Toda la venta es UN solo formulario; al registrarla la procesa venta.js -->
+    <form class="dos-columnas" onsubmit="registrarVenta(event)">
+
+      <section class="tarjeta">
+        <h3>Productos</h3>
+        <!-- venta.js dibuja aquí una tarjeta por cada producto activo -->
+        <div id="productos" class="grid-productos compacto"></div>
+        <p class="nota-rn">No se puede vender más de lo que hay en stock; sin stock, el campo está desactivado (RN-12).</p>
+      </section>
+
+      <aside class="fijo">
+        <section class="tarjeta">
+          <h3>Cliente (opcional)</h3>
+          <label for="dni">DNI</label>
+          <input type="text" id="dni" name="dni" pattern="[0-9]{8}" placeholder="8 dígitos">
+        </section>
+
+        <section class="tarjeta">
+          <h3>Pago</h3>
+          <label class="opcion"><input type="radio" name="pago" value="EFECTIVO" required> Efectivo</label>
+          <label class="opcion"><input type="radio" name="pago" value="YAPE"> Yape</label>
+
+          <table>
+            <tr class="total"><td>Total a pagar</td><td class="derecha" id="total">S/ 0.00</td></tr>
+          </table>
+          <p class="nota-rn">Los precios ya incluyen IGV.</p>
+
+          <label for="recibido">Monto recibido (solo efectivo)</label>
+          <input type="number" id="recibido" name="recibido" min="0" step="0.01" placeholder="Ej. 20.00" oninput="calcularVenta()">
+          <p><strong>Vuelto:</strong> <span id="vuelto">S/ 0.00</span></p>
+
+          <label for="operacion">Código de operación (solo Yape)</label>
+          <input type="text" id="operacion" name="operacion" placeholder="Ej. 512340">
+
+          <p id="mensaje" class="error"></p>
+          <button type="submit" class="boton-ancho">Registrar venta</button>
+          <p class="nota-rn">
+            RN-13 y RN-14 el total y el vuelto se calculan solos · RN-16 la venta y el descuento de stock
+            se guardan juntos · RN-26 la venta de mostrador queda ENTREGADA.
+          </p>
+        </section>
+      </aside>
+    </form>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/venta.js"></script>
+  <script>mostrarProductosVenta();</script>
+</body>
+</html>

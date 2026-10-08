@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Mis entregas</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Repartidor</span></h1>
+      <p>Jorge Mendoza</p>
+    </div>
+    <nav class="menu">
+      <a href="mis-entregas.html" class="activo">Mis entregas</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I8 Delivery, vista restringida del repartidor (funcionalidad 16) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Mis entregas</h2>
+      <p>Solo aparecen los pedidos que te asignaron.</p>
+    </section>
+
+    <section class="kpis">
+      <div class="kpi"><span>Por recoger</span><strong id="kpi-recoger">0</strong></div>
+      <div class="kpi"><span>En camino</span><strong id="kpi-camino">0</strong></div>
+      <div class="kpi"><span>Entregados</span><strong id="kpi-entregados">0</strong></div>
+    </section>
+
+    <section class="tabla-scroll">
+      <table>
+        <thead><tr><th>Código</th><th>Cliente</th><th>Dirección</th><th>Cobrar</th><th>Estado</th><th>Acción</th></tr></thead>
+        <!-- pedidos.js dibuja aquí sus entregas pendientes -->
+        <tbody id="filas"></tbody>
+      </table>
+    </section>
+
+    <p class="nota-rn">RN-20 el despacho avanza ASIGNADO → EN CAMINO → ENTREGADO · RN-23 cada cambio guarda su hora.</p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/pedidos.js"></script>
+  <script>mostrarEntregas();</script>
+</body>
+</html>

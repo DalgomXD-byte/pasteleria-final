@@ -1,0 +1,94 @@
+PASTELERÍA DULCE MANTARO — TIENDA EN LÍNEA
+==========================================
+
+CÓMO ABRIRLO
+Abre index.html con doble clic, o en VS Code con "Open with Live Server".
+No usa librerías ni frameworks: HTML, una hoja de estilos (CSS) y JavaScript.
+Antes de presentar, entra a index.html y haz clic en
+"Restablecer datos de ejemplo" (al pie de la página).
+
+CÓMO FUNCIONA
+Todas las pantallas comparten los mismos datos: productos, pedidos, usuarios
+y categorías. Se guardan en localStorage (la memoria del navegador), así que
+lo que haces en una pantalla se ve en las demás. En el sistema real, ese
+papel lo cumple el backend con la base de datos (Spring Boot + MySQL).
+Los precios YA INCLUYEN IGV: el total es la suma de los importes.
+
+ARCHIVOS
+index.html          Inicio: el usuario elige su tipo de cuenta
+promociones.html    P1 Promociones (pública)
+contacto.html       P2 Contacto (pública)
+css/estilos.css     Única hoja de estilos
+img/                Fotos de los productos (JPG livianos, libres de Pexels)
+
+js/datos.js         Datos de ejemplo + leer/guardar en localStorage + ayudantes
+js/carrito.js       Cliente: catálogo, carrito, confirmación y mis pedidos
+js/pedidos.js       Personal: bandeja, detalle del pedido, delivery y entregas
+js/venta.js         Venta en mostrador y ticket
+js/admin.js         Administrador: catálogo, producto nuevo y usuarios
+
+cliente/            CLIENTE (sesión de ejemplo: Ana Ríos)
+  login.html          I1 Iniciar sesión y crear cuenta             (func. 1, 2)
+  catalogo.html       I2 Catálogo: buscar, filtrar y agregar         (func. 3, 8)
+  carrito.html        I3 Carrito en tiempo real, papelera y checkout (func. 8, 9)
+  confirmacion.html   I3 Pedido confirmado + código de seguimiento   (func. 9)
+  mis-pedidos.html    I4 Historial y seguimiento                     (func. 10, 11)
+
+cajero/             CAJERO (Carmen Lazo)
+  login.html          I1 Ingreso                                     (func. 2)
+  venta.html          I10 Venta en mostrador con fotos               (func. 22)
+  venta-registrada.html I10 Ticket de la venta                       (func. 22)
+  pedidos.html        I7 Bandeja de pedidos                          (func. 12)
+  pedido.html         I7 Atender pedido: estado o cancelar           (func. 13, 14)
+  delivery.html       I8 Asignar repartidor                          (func. 15)
+
+repartidor/         REPARTIDOR (Jorge Mendoza)
+  login.html          I1 Ingreso                                     (func. 2)
+  mis-entregas.html   I8 Solo sus entregas                           (func. 16)
+  entrega.html        I8 Detalle y cambio de estado                  (func. 17)
+
+admin/              ADMINISTRADOR (dueño): acceso a todo
+  login.html          I1 Ingreso                                     (func. 2)
+  panel.html          I5 Panel con las 5 métricas                    (func. 18)
+  catalogo.html       I6 Productos (editar en la fila, inactivar) y categorías (func. 3, 4, 6, 7)
+  producto-nuevo.html I6 Registrar producto                          (func. 5)
+  pedidos.html, pedido.html, venta.html, venta-registrada.html: igual que el cajero
+  delivery.html       I8 Asignar repartidor y cambiar el estado del despacho (func. 15, 17)
+  usuarios.html       I9 Cuentas del cajero y repartidores           (func. 19, 20, 21)
+
+pedido.html y entrega.html son UNA sola página para todos los pedidos:
+la dirección dice cuál mostrar (por ejemplo pedido.html?codigo=PAS-000124).
+
+INGRESO
+Los logins (cliente y personal) dejan entrar con cualquier correo y
+contraseña: comprobar las credenciales es trabajo del backend
+(Spring Security + BCrypt).
+
+RECORRIDO PARA LA DEMO
+1. Cliente   : Catálogo -> agrega productos -> Carrito (cambia cantidades,
+               usa la papelera, el total cambia al instante) -> Confirmar.
+               El stock baja y el pedido aparece en Mis pedidos (RECIBIDO).
+2. Cajero    : Bandeja -> Atender el pedido nuevo -> EN PREPARACIÓN o LISTO.
+               La bandeja muestra el estado nuevo y el botón "Atendido".
+3. Cajero    : Delivery -> asigna un repartidor (queda ASIGNADO).
+4. Repartidor: Mis entregas -> Ver -> EN CAMINO -> ENTREGADO.
+5. Cliente   : Mis pedidos muestra la línea de tiempo completa con las horas.
+6. Cajero    : Venta en mostrador -> cantidades -> Efectivo -> Registrar.
+               Total y vuelto en tiempo real; el ticket muestra la venta.
+7. Admin     : cambia un precio o inactiva un producto: el catálogo del
+               cliente cambia al instante. Desactiva un repartidor: ya no aparece en Delivery.
+
+CÓMO SE HACE CADA COSA (preguntas típicas)
+- Pasar de una página a otra: enlaces <a href> y location.href en JavaScript.
+- Guardar datos entre páginas: localStorage.setItem / getItem con JSON
+  (funciones cargar() y guardar() de datos.js).
+- Dibujar tablas y tarjetas: cada pantalla tiene un contenedor vacío
+  (<tbody id="filas">) y una función mostrar...() que lo llena con innerHTML.
+- Calcular en tiempo real: el evento oninput llama a la función que suma.
+- Estados que solo avanzan (RN-20): la lista muestra todos; el actual va con
+  "selected disabled" y los que no se pueden elegir con "disabled".
+- Editar en la fila: cada campo lleva form="editar-CODIGO", que lo une al
+  formulario (y al botón Guardar) de esa misma fila.
+- Validaciones simples: atributos de HTML5 (required, min, max, pattern).
+  Las reglas del negocio (stock, código único, correo único) en JavaScript.
+- Contraseñas: el campo no tiene "name", así nunca aparece en la dirección.

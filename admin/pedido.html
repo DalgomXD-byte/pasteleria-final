@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Atender pedido</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Administrador</span></h1>
+      <p>Dueño de la pastelería</p>
+    </div>
+    <nav class="menu">
+      <a href="panel.html">Panel de control</a>
+      <a href="catalogo.html">Catálogo</a>
+      <a href="pedidos.html" class="activo">Pedidos</a>
+      <a href="venta.html">Venta en mostrador</a>
+      <a href="delivery.html">Delivery</a>
+      <a href="usuarios.html">Usuarios</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- Parte de I7: atender un pedido (funcionalidades 13 y 14) -->
+  <main class="contenido">
+    <p id="no-encontrado" class="aviso">No se encontró el pedido. <a href="pedidos.html">Volver a la bandeja</a>.</p>
+
+    <!-- pedidos.js llena esta parte con el pedido de la dirección (?codigo=PAS-...) -->
+    <div id="detalle" hidden>
+      <section class="titulo-seccion">
+        <h2 id="titulo"></h2>
+        <p id="llegada"></p>
+      </section>
+
+      <div class="dos-columnas">
+        <div>
+          <section class="tarjeta">
+            <h3>Cliente y entrega</h3>
+            <p><strong>Cliente:</strong> <span id="cliente"></span></p>
+            <p><strong>Dirección:</strong> <span id="direccion"></span></p>
+            <p><strong>Referencia:</strong> <span id="referencia"></span></p>
+          </section>
+
+          <section class="tarjeta">
+            <h3>Productos</h3>
+            <table>
+              <thead><tr><th>Producto</th><th>Cant.</th><th class="derecha">Importe</th></tr></thead>
+              <tbody id="productos"></tbody>
+              <tr class="total"><td colspan="2">Total (IGV incluido)</td><td class="derecha" id="total"></td></tr>
+            </table>
+          </section>
+
+          <section class="tarjeta">
+            <h3>Pago</h3>
+            <p><strong>Medio:</strong> <span id="pago"></span></p>
+            <p id="aviso-pago" class="aviso"></p>
+          </section>
+        </div>
+
+        <aside>
+          <!-- Funcionalidad 13: se ven todos los estados; solo se eligen los siguientes (RN-20) -->
+          <section class="tarjeta">
+            <h3>Actualizar estado</h3>
+            <form id="form-estado" onsubmit="guardarEstado(event)">
+              <p><strong>Pasar a</strong></p>
+              <div id="lista-estados"></div>
+              <button type="submit" class="boton-ancho">Guardar estado</button>
+              <p class="nota-rn">Los estados solo avanzan (se puede saltar uno, nunca retroceder). En gris: los que corresponden al delivery.</p>
+            </form>
+            <p id="sin-cambios" class="aviso" hidden>Este pedido ya pasó a delivery o está cerrado: su estado lo actualiza el repartidor.</p>
+          </section>
+
+          <!-- Funcionalidad 14: cancelar con motivo obligatorio -->
+          <section id="seccion-cancelar" class="tarjeta">
+            <h3>Cancelar pedido</h3>
+            <form onsubmit="cancelarPedido(event)">
+              <label for="motivo">Motivo (obligatorio)</label>
+              <textarea id="motivo" name="motivo" rows="3" required placeholder="Ej. no se encontró el pago"></textarea>
+              <button type="submit" class="boton-peligro boton-ancho">Cancelar pedido</button>
+            </form>
+            <p class="nota-rn">RN-20 solo se cancela antes de LISTO · RN-21 el stock se devuelve.</p>
+          </section>
+
+          <a href="pedidos.html" class="volver">&larr; Volver a la bandeja</a>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Uso interno del personal</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/pedidos.js"></script>
+  <script>mostrarPedido();</script>
+</body>
+</html>

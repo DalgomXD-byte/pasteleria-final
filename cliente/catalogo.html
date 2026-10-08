@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulce Mantaro — Catálogo</title>
+  <link rel="stylesheet" href="../css/estilos.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="logo">
+      <h1>Dulce Mantaro <span class="rol">Cliente</span></h1>
+      <p>Hola, Ana Ríos</p>
+    </div>
+    <nav class="menu">
+      <a href="catalogo.html" class="activo">Catálogo</a>
+      <a href="carrito.html">Carrito (<span id="contador">0</span>)</a>
+      <a href="mis-pedidos.html">Mis pedidos</a>
+      <a href="../index.html" class="salir">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <!-- I2 Catálogo (funcionalidades 3 y 8) -->
+  <main class="contenido">
+    <section class="titulo-seccion">
+      <h2>Nuestro catálogo</h2>
+      <p>Precio y stock actualizados.</p>
+    </section>
+
+    <!-- Funcionalidad 3: buscar por nombre y filtrar por categoría (carrito.js) -->
+    <form class="tarjeta form-linea" onsubmit="filtrar(event)">
+      <div>
+        <label for="q">Buscar</label>
+        <input type="text" id="q" name="q" placeholder="Ej. torta">
+      </div>
+      <div>
+        <label for="categoria">Categoría</label>
+        <select id="categoria" name="categoria"></select>
+      </div>
+      <button type="submit">Filtrar</button>
+    </form>
+
+    <!-- carrito.js dibuja aquí una tarjeta por cada producto activo -->
+    <section id="productos" class="grid-productos"></section>
+
+    <p class="nota-rn">
+      RN-08 cada producto pertenece a una categoría · RN-10 los productos inactivos no se muestran ·
+      RN-12 no se vende un producto sin stock.
+    </p>
+  </main>
+
+  <footer class="pie">
+    <p>Pastelería Dulce Mantaro · Calle Real 845, Huancayo · (064) 000-000</p>
+  </footer>
+
+  <script src="../js/datos.js"></script>
+  <script src="../js/carrito.js"></script>
+  <script>mostrarCatalogo();</script>
+</body>
+</html>
