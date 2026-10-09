@@ -24,7 +24,6 @@
     </nav>
   </header>
 
-  <!-- I9 Gestión de usuarios del personal (funcionalidades 19, 20 y 21) -->
   <main class="contenido">
     <section class="titulo-seccion">
       <h2>Cuentas del personal</h2>
@@ -33,13 +32,10 @@
 
     <p id="mensaje" class="mensaje"></p>
 
-    <!-- Cada fila se edita aquí mismo (funcionalidad 20).
-         El atributo form="usuario-N" une los campos de la fila con SU botón Guardar. -->
     <section class="tarjeta tabla-scroll">
       <h3>Personal registrado</h3>
       <table>
         <thead><tr><th>Nombre</th><th>Correo</th><th>Teléfono</th><th>Rol</th><th>Estado</th><th>Acciones</th></tr></thead>
-        <!-- admin.js dibuja aquí una fila por cuenta -->
         <tbody id="filas"></tbody>
       </table>
       <p class="nota-rn">
@@ -48,7 +44,6 @@
       </p>
     </section>
 
-    <!-- Funcionalidad 19: registrar una cuenta del personal -->
     <form class="tarjeta form-angosto" onsubmit="crearUsuario(event)">
       <h3>Nueva cuenta del personal</h3>
 

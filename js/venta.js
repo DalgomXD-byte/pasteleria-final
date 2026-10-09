@@ -1,17 +1,10 @@
-// =========================================================
-// VENTA EN MOSTRADOR (funcionalidad 22)
-// La usan venta.html y venta-registrada.html (cajero y administrador).
-// Necesita datos.js. Los precios YA INCLUYEN IGV.
-// =========================================================
-
-// Tarjetas de los productos activos, con su foto, precio y stock
 function mostrarProductosVenta() {
   let tarjetas = '';
   for (const p of cargar().productos.filter(p => p.activo)) {
     const campo = p.stock > 0
       ? `<input type="number" id="c-${p.codigo}" class="cantidad" data-codigo="${p.codigo}"
                 value="0" min="0" max="${p.stock}" oninput="calcularVenta()">`
-      : `<input type="number" id="c-${p.codigo}" value="0" disabled>`;          // RN-12
+      : `<input type="number" id="c-${p.codigo}" value="0" disabled>`;
     tarjetas += `
       <article class="producto">
         ${fotoDe(p)}
@@ -26,13 +19,12 @@ function mostrarProductosVenta() {
   document.getElementById('productos').innerHTML = tarjetas;
 }
 
-// Productos con cantidad mayor que 0 (con su precio y nombre)
 function productosElegidos() {
   const bd = cargar();
   const elegidos = [];
   for (const campo of document.querySelectorAll('.cantidad')) {
     let cantidad = Number(campo.value);
-    if (cantidad > Number(campo.max)) {                    // RN-12: nunca más que el stock
+    if (cantidad > Number(campo.max)) {
       cantidad = Number(campo.max);
       campo.value = campo.max;
     }
@@ -44,7 +36,6 @@ function productosElegidos() {
   return elegidos;
 }
 
-// Se ejecuta cada vez que cambia una cantidad o el monto recibido
 function calcularVenta() {
   const total = totalDe(productosElegidos());
   const recibido = Number(document.getElementById('recibido').value);
@@ -69,12 +60,11 @@ function registrarVenta(evento) {
     mensaje.textContent = 'El monto recibido no alcanza para el total.';
     return;
   }
-  if (datos.pago.value === 'YAPE' && datos.operacion.value.trim() === '') {    // RN-17
+  if (datos.pago.value === 'YAPE' && datos.operacion.value.trim() === '') {
     mensaje.textContent = 'Escribe el código de operación del Yape.';
     return;
   }
 
-  // RN-16: la venta y el descuento de stock se guardan juntos
   const bd = cargar();
   for (const x of productos) {
     buscarProducto(bd, x.codigo).stock -= x.cantidad;
@@ -82,7 +72,7 @@ function registrarVenta(evento) {
   const venta = {
     codigo: nuevoCodigo(bd), canal: 'MOSTRADOR', cliente: datos.dni.value ? 'DNI ' + datos.dni.value : 'Cliente en mostrador',
     telefono: '', direccion: 'Local', referencia: '', pago: datos.pago.value, operacion: datos.operacion.value,
-    recibido, repartidor: '', motivo: '', estado: 'ENTREGADO',                   // RN-26
+    recibido, repartidor: '', motivo: '', estado: 'ENTREGADO',
     productos, historial: [{ estado: 'ENTREGADO', hora: ahora() }]
   };
   bd.pedidos.unshift(venta);
@@ -91,10 +81,9 @@ function registrarVenta(evento) {
   location.href = 'venta-registrada.html';
 }
 
-// Ticket: muestra la última venta registrada
 function mostrarTicket() {
   const venta = buscarPedido(cargar(), localStorage.getItem('ultimaVenta'));
-  if (!venta) return;                                     // queda el mensaje de la página
+  if (!venta) return;
   const total = totalDe(venta.productos);
   let filas = '';
   for (const p of venta.productos) {

@@ -24,19 +24,16 @@
     </nav>
   </header>
 
-  <!-- I10 Venta en mostrador (funcionalidad 22) -->
   <main class="contenido">
     <section class="titulo-seccion">
       <h2>Venta en mostrador</h2>
       <p>Para el cliente que compra en el local: escribe la cantidad de cada producto que pide.</p>
     </section>
 
-    <!-- Toda la venta es UN solo formulario; al registrarla la procesa venta.js -->
     <form class="dos-columnas" onsubmit="registrarVenta(event)">
 
       <section class="tarjeta">
         <h3>Productos</h3>
-        <!-- venta.js dibuja aquí una tarjeta por cada producto activo -->
         <div id="productos" class="grid-productos compacto"></div>
         <p class="nota-rn">No se puede vender más de lo que hay en stock; sin stock, el campo está desactivado (RN-12).</p>
       </section>

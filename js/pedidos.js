@@ -1,18 +1,10 @@
-// =========================================================
-// PEDIDOS DEL PERSONAL: bandeja, detalle del pedido, delivery y entregas
-// La usan el cajero, el administrador y el repartidor.
-// Necesita datos.js (se carga antes en cada página).
-// =========================================================
+const REPARTIDOR = 'Jorge Mendoza';
+let puedeCambiarDespacho = false;
 
-const REPARTIDOR = 'Jorge Mendoza';            // sesión simulada del repartidor
-let puedeCambiarDespacho = false;              // en Delivery, solo el administrador cambia el estado
-
-// ---------- Estados (RN-20: solo avanzan, se puede saltar uno, nunca retroceder) ----------
 function siguientes(actual, delRol) {
   return delRol.filter(e => ESTADOS.indexOf(e) > ESTADOS.indexOf(actual));
 }
 
-// Lista con todos los estados: el actual marcado y en gris los que no se pueden elegir
 function listaEstados(actual, permitidos) {
   let opciones = '';
   for (const e of ESTADOS) {
@@ -27,11 +19,10 @@ function listaEstados(actual, permitidos) {
 
 function cambiarEstado(bd, pedido, estado) {
   pedido.estado = estado;
-  pedido.historial.push({ estado, hora: ahora() });      // RN-23: cada cambio guarda su hora
+  pedido.historial.push({ estado, hora: ahora() });
   guardar(bd);
 }
 
-// ---------- Bandeja de pedidos (funcionalidad 12) ----------
 function mostrarBandeja() {
   const web = cargar().pedidos.filter(p => p.canal === 'WEB');
   const cuantos = estado => web.filter(p => p.estado === estado).length;
@@ -59,7 +50,6 @@ function mostrarBandeja() {
   document.getElementById('filas').innerHTML = filas || '<tr><td colspan="8">No hay pedidos con ese estado.</td></tr>';
 }
 
-// Lo que se puede hacer con el pedido según su estado
 function accionDe(p) {
   const ver = `pedido.html?codigo=${p.codigo}`;
   if (p.estado === 'RECIBIDO') return `<a href="${ver}" class="boton">Atender</a>`;
@@ -70,10 +60,9 @@ function accionDe(p) {
   return 'En delivery con ' + p.repartidor;
 }
 
-// ---------- Detalle del pedido (funcionalidades 13 y 14) ----------
 function mostrarPedido() {
   const p = buscarPedido(cargar(), codigoDeLaDireccion());
-  if (!p) return;                                          // queda el mensaje "no encontrado"
+  if (!p) return;
   const total = totalDe(p.productos);
   let filas = '';
   for (const x of p.productos) {
@@ -91,7 +80,6 @@ function mostrarPedido() {
     ? `No hay pago que verificar: el repartidor cobrará ${soles(total)} al entregar.`
     : `Antes de avanzar, revisa que la operación ${p.operacion} por ${soles(total)} exista.`;
 
-  // El cajero lleva el pedido hasta LISTO; lo demás lo hace el delivery
   const permitidos = siguientes(p.estado, ['EN_PREPARACION', 'LISTO']);
   if (permitidos.length > 0) {
     document.getElementById('lista-estados').innerHTML = listaEstados(p.estado, permitidos);
@@ -99,7 +87,6 @@ function mostrarPedido() {
     document.getElementById('form-estado').hidden = true;
     document.getElementById('sin-cambios').hidden = false;
   }
-  // RN-20: solo se cancela antes de LISTO
   document.getElementById('seccion-cancelar').hidden = !['RECIBIDO', 'EN_PREPARACION'].includes(p.estado);
   document.getElementById('detalle').hidden = false;
   document.getElementById('no-encontrado').hidden = true;
@@ -109,14 +96,14 @@ function guardarEstado(evento) {
   evento.preventDefault();
   const bd = cargar();
   cambiarEstado(bd, buscarPedido(bd, codigoDeLaDireccion()), evento.target.estado.value);
-  location.href = 'pedidos.html';                          // vuelve a la bandeja ya actualizada
+  location.href = 'pedidos.html';
 }
 
 function cancelarPedido(evento) {
   evento.preventDefault();
   const bd = cargar();
   const p = buscarPedido(bd, codigoDeLaDireccion());
-  for (const x of p.productos) {                           // RN-21: devuelve el stock
+  for (const x of p.productos) {
     buscarProducto(bd, x.codigo).stock += x.cantidad;
   }
   p.motivo = evento.target.motivo.value;
@@ -124,7 +111,6 @@ function cancelarPedido(evento) {
   location.href = 'pedidos.html';
 }
 
-// ---------- Delivery (funcionalidades 15 y 17) ----------
 function mostrarDelivery(esAdministrador) {
   puedeCambiarDespacho = esAdministrador;
   const bd = cargar();
@@ -134,7 +120,7 @@ function mostrarDelivery(esAdministrador) {
   }
 
   let listos = '';
-  for (const p of bd.pedidos.filter(p => p.estado === 'LISTO')) {     // RN-22: solo los LISTO
+  for (const p of bd.pedidos.filter(p => p.estado === 'LISTO')) {
     listos += `
       <tr>
         <td>${p.codigo}</td><td>${p.cliente}</td><td>${p.direccion}</td><td>${soles(totalDe(p.productos))}</td>
@@ -167,7 +153,7 @@ function asignar(evento, codigo) {
   const p = buscarPedido(bd, codigo);
   p.repartidor = evento.target.repartidor.value;
   cambiarEstado(bd, p, 'ASIGNADO');
-  mostrarDelivery(puedeCambiarDespacho);                   // la tabla se actualiza al instante
+  mostrarDelivery(puedeCambiarDespacho);
 }
 
 function cambiarDespacho(evento, codigo) {
@@ -177,9 +163,8 @@ function cambiarDespacho(evento, codigo) {
   mostrarDelivery(puedeCambiarDespacho);
 }
 
-// ---------- Repartidor: mis entregas (funcionalidades 16 y 17) ----------
 function mostrarEntregas() {
-  const mias = cargar().pedidos.filter(p => p.repartidor === REPARTIDOR);   // solo las suyas
+  const mias = cargar().pedidos.filter(p => p.repartidor === REPARTIDOR);
   const cuantos = estado => mias.filter(p => p.estado === estado).length;
   document.getElementById('kpi-recoger').textContent = cuantos('ASIGNADO');
   document.getElementById('kpi-camino').textContent = cuantos('EN_CAMINO');
@@ -203,7 +188,7 @@ function cobrar(p) {
 
 function mostrarEntrega() {
   const p = buscarPedido(cargar(), codigoDeLaDireccion());
-  if (!p || p.repartidor !== REPARTIDOR) return;           // no es suya: queda "no encontrado"
+  if (!p || p.repartidor !== REPARTIDOR) return;
   let filas = '';
   for (const x of p.productos) {
     filas += `<tr><td>${x.nombre}</td><td>${x.cantidad}</td></tr>`;

@@ -21,11 +21,9 @@
     </nav>
   </header>
 
-  <!-- Parte de I7: atender un pedido (funcionalidades 13 y 14) -->
   <main class="contenido">
     <p id="no-encontrado" class="aviso">No se encontró el pedido. <a href="pedidos.html">Volver a la bandeja</a>.</p>
 
-    <!-- pedidos.js llena esta parte con el pedido de la dirección (?codigo=PAS-...) -->
     <div id="detalle" hidden>
       <section class="titulo-seccion">
         <h2 id="titulo"></h2>
@@ -58,7 +56,6 @@
         </div>
 
         <aside>
-          <!-- Funcionalidad 13: se ven todos los estados; solo se eligen los siguientes (RN-20) -->
           <section class="tarjeta">
             <h3>Actualizar estado</h3>
             <form id="form-estado" onsubmit="guardarEstado(event)">
@@ -70,7 +67,6 @@
             <p id="sin-cambios" class="aviso" hidden>Este pedido ya pasó a delivery o está cerrado: su estado lo actualiza el repartidor.</p>
           </section>
 
-          <!-- Funcionalidad 14: cancelar con motivo obligatorio -->
           <section id="seccion-cancelar" class="tarjeta">
             <h3>Cancelar pedido</h3>
             <form onsubmit="cancelarPedido(event)">

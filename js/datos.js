@@ -1,13 +1,3 @@
-// =========================================================
-// DATOS DE LA PASTELERÍA (simula la base de datos)
-// La usan todas las pantallas que muestran o cambian datos.
-//
-// La primera vez se copian estos datos de ejemplo a localStorage
-// (la memoria del navegador). Desde ahí, cada pantalla lee y guarda
-// en localStorage, así un cambio se ve en todas las demás.
-// En el sistema real esto lo haría el backend con la base de datos.
-// =========================================================
-
 const DATOS_DE_EJEMPLO = {
   categorias: [
     { nombre: 'Tortas', descripcion: 'Tortas enteras para celebraciones' },
@@ -17,7 +7,6 @@ const DATOS_DE_EJEMPLO = {
     { nombre: 'Bebidas', descripcion: 'Bebidas para acompañar' }
   ],
 
-  // Los precios YA INCLUYEN IGV
   productos: [
     { codigo: 'TOR-001', nombre: 'Torta de chocolate', categoria: 'Tortas', precio: 65, stock: 8, foto: 'tor-001.jpg', activo: true },
     { codigo: 'TOR-002', nombre: 'Torta tres leches', categoria: 'Tortas', precio: 55, stock: 5, foto: 'tor-002.jpg', activo: true },
@@ -69,10 +58,8 @@ const DATOS_DE_EJEMPLO = {
   ]
 };
 
-// Orden de los estados del pedido (RN-20)
 const ESTADOS = ['RECIBIDO', 'EN_PREPARACION', 'LISTO', 'ASIGNADO', 'EN_CAMINO', 'ENTREGADO'];
 
-// ---------- Leer y guardar ----------
 function cargar() {
   const guardado = localStorage.getItem('dulceMantaro');
   return guardado ? JSON.parse(guardado) : structuredClone(DATOS_DE_EJEMPLO);
@@ -82,13 +69,11 @@ function guardar(bd) {
   localStorage.setItem('dulceMantaro', JSON.stringify(bd));
 }
 
-// Vuelve a los datos de ejemplo (útil antes de presentar la demo)
 function reiniciarDemo() {
   localStorage.clear();
   location.reload();
 }
 
-// ---------- Ayudantes ----------
 function soles(monto) {
   return 'S/ ' + monto.toFixed(2);
 }
@@ -111,12 +96,10 @@ function textoEstado(estado) {
   return estado.replace('_', ' ').replace('PREPARACION', 'PREPARACIÓN');
 }
 
-// Etiqueta de color del estado (usa las clases .estado del CSS)
 function etiqueta(estado) {
   return `<span class="estado ${estado.toLowerCase().replace('_', '-')}">${textoEstado(estado)}</span>`;
 }
 
-// Código de seguimiento nuevo: el número más alto + 1 (RN-18)
 function nuevoCodigo(bd) {
   let mayor = 0;
   for (const p of bd.pedidos) {
@@ -133,12 +116,10 @@ function buscarProducto(bd, codigo) {
   return bd.productos.find(p => p.codigo === codigo);
 }
 
-// Lee ?codigo=PAS-000124 de la dirección de la página
 function codigoDeLaDireccion() {
   return new URLSearchParams(location.search).get('codigo');
 }
 
-// Foto del producto, o un recuadro si no tiene
 function fotoDe(producto) {
   return producto.foto
     ? `<img class="foto" src="../img/${producto.foto}" alt="${producto.nombre}">`

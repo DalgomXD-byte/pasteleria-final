@@ -1,14 +1,7 @@
-// =========================================================
-// PANTALLAS DEL ADMINISTRADOR: catálogo, producto nuevo y usuarios
-// Necesita datos.js (se carga antes en cada página).
-// =========================================================
-
 function avisar(texto) {
   document.getElementById('mensaje').textContent = texto;
 }
 
-// ---------- Catálogo: productos (funcionalidades 3, 6 y 7) ----------
-// Cada fila tiene su propio formulario: los campos llevan form="editar-CODIGO"
 function mostrarCatalogoAdmin() {
   const bd = cargar();
   let filas = '';
@@ -32,7 +25,6 @@ function mostrarCatalogoAdmin() {
   }
   document.getElementById('filas').innerHTML = filas;
 
-  // Categorías con la cantidad de productos de cada una
   let categorias = '';
   for (const c of bd.categorias) {
     const cuantos = bd.productos.filter(p => p.categoria === c.nombre).length;
@@ -43,18 +35,18 @@ function mostrarCatalogoAdmin() {
 
 function guardarProducto(evento, codigo) {
   evento.preventDefault();
-  const datos = evento.target;              // incluye los campos unidos con form="..."
+  const datos = evento.target;
   const bd = cargar();
   const p = buscarProducto(bd, codigo);
   p.nombre = datos.nombre.value;
-  p.precio = Number(datos.precio.value);    // RN-07: el campo no acepta 0 ni negativos
-  p.stock = Number(datos.stock.value);      // RN-11: el campo no acepta negativos
+  p.precio = Number(datos.precio.value);
+  p.stock = Number(datos.stock.value);
   guardar(bd);
   mostrarCatalogoAdmin();
   avisar('Producto ' + codigo + ' actualizado.');
 }
 
-function inactivar(codigo) {                // RN-09: baja lógica, no se borra
+function inactivar(codigo) {
   const bd = cargar();
   buscarProducto(bd, codigo).activo = false;
   guardar(bd);
@@ -62,7 +54,6 @@ function inactivar(codigo) {                // RN-09: baja lógica, no se borra
   avisar('Producto ' + codigo + ' inactivado: ya no aparece en la tienda.');
 }
 
-// ---------- Nueva categoría (funcionalidad 4) ----------
 function nuevaCategoria(evento) {
   evento.preventDefault();
   const datos = evento.target;
@@ -79,7 +70,6 @@ function nuevaCategoria(evento) {
   avisar('Categoría ' + nombre + ' creada.');
 }
 
-// ---------- Producto nuevo (funcionalidad 5) ----------
 function mostrarCategoriasEnFormulario() {
   let opciones = '<option value="">— Elige una categoría —</option>';
   for (const c of cargar().categorias) {
@@ -93,7 +83,7 @@ function crearProducto(evento) {
   const datos = evento.target;
   const bd = cargar();
   const codigo = datos.codigo.value.trim().toUpperCase();
-  if (buscarProducto(bd, codigo)) {                          // RN-06: código único
+  if (buscarProducto(bd, codigo)) {
     avisar('Ya existe un producto con el código ' + codigo + '.');
     return;
   }
@@ -105,11 +95,10 @@ function crearProducto(evento) {
   location.href = 'catalogo.html';
 }
 
-// ---------- Usuarios del personal (funcionalidades 19, 20 y 21) ----------
 function mostrarUsuarios() {
   let filas = '';
   cargar().usuarios.forEach((u, i) => {
-    if (u.rol === 'Administrador') return;                   // la cuenta del dueño no se edita aquí
+    if (u.rol === 'Administrador') return;
     const f = 'usuario-' + i;
     const roles = ['Cajero', 'Repartidor'].map(r => `<option ${r === u.rol ? 'selected' : ''}>${r}</option>`).join('');
     const desactivar = u.activo
@@ -130,7 +119,7 @@ function mostrarUsuarios() {
   document.getElementById('filas').innerHTML = filas;
 }
 
-function correoRepetido(bd, correo, menos) {                  // RN-04: el correo es único
+function correoRepetido(bd, correo, menos) {
   return bd.usuarios.some((u, i) => i !== menos && u.correo.toLowerCase() === correo.toLowerCase());
 }
 
@@ -150,7 +139,7 @@ function guardarUsuario(evento, i) {
   avisar('Cuenta de ' + datos.nombre.value + ' actualizada.');
 }
 
-function desactivarUsuario(i) {                               // baja lógica: no se borra
+function desactivarUsuario(i) {
   const bd = cargar();
   bd.usuarios[i].activo = false;
   guardar(bd);

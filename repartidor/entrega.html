@@ -19,11 +19,9 @@
     </nav>
   </header>
 
-  <!-- Parte de I8: detalle de una entrega asignada (funcionalidad 17) -->
   <main class="contenido">
     <p id="no-encontrado" class="aviso">No se encontró la entrega. <a href="mis-entregas.html">Volver a mis entregas</a>.</p>
 
-    <!-- pedidos.js llena esta parte con la entrega de la dirección (?codigo=PAS-...) -->
     <div id="detalle" hidden>
       <section class="titulo-seccion">
         <h2 id="titulo"></h2>
@@ -51,7 +49,6 @@
         </div>
 
         <aside>
-          <!-- Se ven todos los estados; solo se eligen los siguientes (RN-20) -->
           <section class="tarjeta">
             <h3>Actualizar estado</h3>
             <form id="form-estado" onsubmit="guardarEntrega(event)">

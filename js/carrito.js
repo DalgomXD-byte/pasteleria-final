@@ -1,11 +1,4 @@
-// =========================================================
-// PANTALLAS DEL CLIENTE: catálogo, carrito, confirmación y mis pedidos
-// Necesita datos.js (se carga antes en cada página).
-// El carrito se guarda aparte, en localStorage, con la clave 'carrito'.
-// Los precios YA INCLUYEN IGV: el total es la suma de los importes.
-// =========================================================
-
-const CLIENTE = { nombre: 'Ana Ríos', telefono: '987 654 321' };   // sesión simulada
+const CLIENTE = { nombre: 'Ana Ríos', telefono: '987 654 321' };
 
 function leerCarrito() {
   return JSON.parse(localStorage.getItem('carrito')) || [];
@@ -15,7 +8,6 @@ function guardarCarrito(carrito) {
   localStorage.setItem('carrito', JSON.stringify(carrito));
 }
 
-// ---------- Menú: "Carrito (n)" ----------
 function mostrarContador() {
   let unidades = 0;
   for (const p of leerCarrito()) {
@@ -24,7 +16,6 @@ function mostrarContador() {
   document.getElementById('contador').textContent = unidades;
 }
 
-// ---------- Catálogo (funcionalidad 3) ----------
 function mostrarCatalogo() {
   const bd = cargar();
   let opciones = '<option>Todas</option>';
@@ -34,7 +25,7 @@ function mostrarCatalogo() {
   document.getElementById('categoria').innerHTML = opciones;
 
   let tarjetas = '';
-  for (const p of bd.productos.filter(p => p.activo)) {      // RN-10: los inactivos no se muestran
+  for (const p of bd.productos.filter(p => p.activo)) {
     const compra = p.stock > 0
       ? `<p class="stock">Stock: ${p.stock} unidades</p>
          <form class="form-linea" onsubmit="agregar(event, '${p.codigo}')">
@@ -42,7 +33,7 @@ function mostrarCatalogo() {
            <button type="submit">Agregar</button>
          </form>`
       : `<p class="stock agotado">Agotado</p>
-         <button type="button" disabled>Sin stock</button>`;          // RN-12
+         <button type="button" disabled>Sin stock</button>`;
     tarjetas += `
       <article class="producto">
         ${fotoDe(p)}
@@ -67,16 +58,15 @@ function filtrar(evento) {
   }
 }
 
-// ---------- Botón "Agregar" (funcionalidad 8) ----------
 function agregar(evento, codigo) {
-  evento.preventDefault();                                    // se queda en el catálogo
+  evento.preventDefault();
   const p = buscarProducto(cargar(), codigo);
   const cantidad = Number(evento.target.cantidad.value);
   const carrito = leerCarrito();
   const enCarrito = carrito.find(x => x.codigo === codigo);
 
   if (enCarrito) {
-    enCarrito.cantidad = Math.min(enCarrito.cantidad + cantidad, p.stock);   // RN-12
+    enCarrito.cantidad = Math.min(enCarrito.cantidad + cantidad, p.stock);
   } else {
     carrito.push({ codigo, nombre: p.nombre, precio: p.precio, stock: p.stock, cantidad });
   }
@@ -85,7 +75,6 @@ function agregar(evento, codigo) {
   evento.target.querySelector('button').textContent = 'Agregado ✓';
 }
 
-// ---------- Carrito ----------
 function mostrarCarrito() {
   const carrito = leerCarrito();
   let filas = '';
@@ -106,13 +95,12 @@ function mostrarCarrito() {
   actualizarTotales();
 }
 
-// Al escribir una cantidad se recalcula todo al instante
 function cambiarCantidad(i, campo) {
   const carrito = leerCarrito();
   const p = carrito[i];
   let cantidad = Number(campo.value);
   if (cantidad < 1) cantidad = 1;
-  if (cantidad > p.stock) {                                   // RN-12
+  if (cantidad > p.stock) {
     cantidad = p.stock;
     campo.value = p.stock;
   }
@@ -124,12 +112,11 @@ function cambiarCantidad(i, campo) {
 
 function eliminar(i) {
   const carrito = leerCarrito();
-  carrito.splice(i, 1);                                       // quita el producto
+  carrito.splice(i, 1);
   guardarCarrito(carrito);
   mostrarCarrito();
 }
 
-// Total = suma de importes. El IGV ya está dentro: solo se muestra (total × 18 / 118)
 function actualizarTotales() {
   const total = totalDe(leerCarrito());
   document.getElementById('total').textContent = soles(total);
@@ -137,7 +124,6 @@ function actualizarTotales() {
   mostrarContador();
 }
 
-// ---------- Confirmar pedido (funcionalidad 9) ----------
 function confirmarPedido(evento) {
   evento.preventDefault();
   const datos = evento.target;
@@ -145,12 +131,10 @@ function confirmarPedido(evento) {
   const bd = cargar();
   const carrito = leerCarrito();
 
-  // RN-17: Yape y transferencia exigen el código de operación
   if (datos.pago.value !== 'CONTRAENTREGA' && datos.operacion.value.trim() === '') {
     mensaje.textContent = 'Escribe el código de operación de tu Yape o transferencia.';
     return;
   }
-  // RN-12: se vuelve a revisar el stock justo antes de confirmar
   for (const item of carrito) {
     const p = buscarProducto(bd, item.codigo);
     if (item.cantidad > p.stock) {
@@ -159,7 +143,6 @@ function confirmarPedido(evento) {
     }
   }
 
-  // RN-16: el pedido y el descuento de stock se guardan juntos
   for (const item of carrito) {
     buscarProducto(bd, item.codigo).stock -= item.cantidad;
   }
@@ -172,16 +155,15 @@ function confirmarPedido(evento) {
   };
   bd.pedidos.unshift(pedido);
   guardar(bd);
-  guardarCarrito([]);                                         // el carrito queda vacío
+  guardarCarrito([]);
   localStorage.setItem('ultimoPedido', pedido.codigo);
   location.href = 'confirmacion.html';
 }
 
-// ---------- Confirmación ----------
 function mostrarConfirmacion() {
   mostrarContador();
   const pedido = buscarPedido(cargar(), localStorage.getItem('ultimoPedido'));
-  if (!pedido) return;                                        // queda el mensaje de la página
+  if (!pedido) return;
   let filas = '';
   for (const p of pedido.productos) {
     filas += `<tr><td>${p.cantidad} × ${p.nombre}</td><td class="derecha">${soles(p.precio * p.cantidad)}</td></tr>`;
@@ -195,8 +177,6 @@ function mostrarConfirmacion() {
   document.getElementById('sin-pedido').hidden = true;
 }
 
-// ---------- Mis pedidos (funcionalidades 10 y 11) ----------
-// RN-19: el cliente solo ve sus propios pedidos
 function mostrarMisPedidos() {
   mostrarContador();
   const mios = cargar().pedidos.filter(p => p.cliente === CLIENTE.nombre);
@@ -229,7 +209,6 @@ function mostrarMisPedidos() {
   document.getElementById('lista').innerHTML = html || '<p class="aviso">Todavía no tienes pedidos.</p>';
 }
 
-// Los pasos ya cumplidos van resaltados y con su hora (RN-23)
 function lineaDeTiempo(pedido) {
   if (pedido.estado === 'CANCELADO') {
     return `<p class="aviso">Pedido cancelado el ${pedido.historial.at(-1).hora}. Motivo: ${pedido.motivo}</p>`;

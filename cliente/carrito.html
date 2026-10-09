@@ -21,17 +21,14 @@
     </nav>
   </header>
 
-  <!-- I3 Carrito y Checkout (funcionalidades 8 y 9) -->
   <main class="contenido">
     <section class="titulo-seccion">
       <h2>Mi carrito</h2>
       <p>Revisa tu pedido, indica la dirección de entrega y el medio de pago.</p>
     </section>
 
-    <!-- Todo el checkout es UN solo formulario; al confirmarlo lo procesa carrito.js -->
     <form class="dos-columnas" onsubmit="confirmarPedido(event)">
 
-      <!-- Columna izquierda: productos y datos de entrega -->
       <div>
         <section class="tarjeta tabla-scroll">
           <h3>Productos</h3>
@@ -45,7 +42,6 @@
                 <th></th>
               </tr>
             </thead>
-            <!-- carrito.js dibuja aquí una fila por producto -->
             <tbody id="filas"></tbody>
           </table>
           <p id="carrito-vacio" class="aviso" hidden>
@@ -82,7 +78,6 @@
         </section>
       </div>
 
-      <!-- Columna derecha: total calculado en tiempo real -->
       <aside class="fijo">
         <section class="tarjeta">
           <h3>Resumen</h3>

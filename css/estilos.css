@@ -1,24 +1,16 @@
-/* =========================================================
-   ESTILOS DE LA PASTELERÍA
-   Una sola hoja de estilos para todas las páginas.
-   Solo CSS: sin animaciones y sin JavaScript.
-   ========================================================= */
-
-/* ---------- 1. Colores (variables) ---------- */
 :root {
-  --azul-oscuro: #1F3864;   /* cabecera y títulos */
-  --azul-medio: #2E5496;    /* botones y menú activo */
-  --naranja: #C55A11;       /* precios, totales y rol */
-  --verde: #548235;         /* botón agregar al carrito */
-  --rojo: #C00000;          /* cancelar y agotado */
-  --fondo: #F4F6F9;         /* fondo de la página */
-  --gris-claro: #EDEFF3;    /* encabezados de tabla */
-  --gris: #667085;          /* textos secundarios */
+  --azul-oscuro: #1F3864;
+  --azul-medio: #2E5496;
+  --naranja: #C55A11;
+  --verde: #548235;
+  --rojo: #C00000;
+  --fondo: #F4F6F9;
+  --gris-claro: #EDEFF3;
+  --gris: #667085;
   --borde: #C9CDD4;
   --blanco: #FFFFFF;
 }
 
-/* ---------- 2. Base ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,7 +43,6 @@ h3 {
   margin-bottom: 10px;
 }
 
-/* ---------- 3. Cabecera y menú ---------- */
 .cabecera {
   background: var(--azul-oscuro);
   color: var(--blanco);
@@ -73,7 +64,6 @@ h3 {
   color: #A9BCE0;
 }
 
-/* Etiqueta que indica con qué rol se ingresó */
 .rol {
   display: inline-block;
   background: var(--naranja);
@@ -102,7 +92,6 @@ h3 {
   color: var(--blanco);
 }
 
-/* Opción del menú de la página actual */
 .menu a.activo {
   background: var(--azul-medio);
   color: var(--blanco);
@@ -112,7 +101,6 @@ h3 {
   border: 1px solid #C6D3EA;
 }
 
-/* ---------- 4. Contenido y pie ---------- */
 .contenido {
   max-width: 1100px;
   margin: 0 auto;
@@ -140,7 +128,6 @@ h3 {
   color: #C6D3EA;
 }
 
-/* Caja blanca genérica */
 .tarjeta {
   background: var(--blanco);
   border: 1px solid var(--borde);
@@ -149,14 +136,12 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* Nota con la regla de negocio que cumple la pantalla */
 .nota-rn {
   font-size: 12px;
   color: var(--gris);
   margin-top: 10px;
 }
 
-/* Mensaje destacado (éxito o advertencia) */
 .aviso {
   background: #FFF7E0;
   border-left: 4px solid #E5C158;
@@ -165,7 +150,6 @@ h3 {
   margin-bottom: 20px;
 }
 
-/* Aviso dentro de una caja, o debajo de una fila de tarjetas */
 .tarjeta .aviso {
   margin: 10px 0 0;
 }
@@ -174,24 +158,20 @@ h3 {
   margin-top: 20px;
 }
 
-/* ---------- 5. Dos columnas ---------- */
 .dos-columnas {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
 }
 
-/* Contenido de cada pedido desplegable en "Mis pedidos" */
 details .dos-columnas {
   margin-top: 12px;
 }
 
-/* Formulario de una sola columna, no muy ancho */
 .form-angosto {
   max-width: 600px;
 }
 
-/* ---------- 6. Formularios ---------- */
 label {
   display: block;
   font-weight: bold;
@@ -212,7 +192,6 @@ textarea {
   background: var(--blanco);
 }
 
-/* Los radios no ocupan todo el ancho */
 input[type="radio"] {
   width: auto;
   margin-right: 6px;
@@ -224,7 +203,6 @@ input[type="radio"] {
   color: #222;
 }
 
-/* Formulario pequeño en una sola fila (filtros, cantidades) */
 .form-linea {
   display: flex;
   gap: 8px;
@@ -241,7 +219,6 @@ input[type="radio"] {
   width: auto;
 }
 
-/* ---------- 7. Botones ---------- */
 .boton,
 button {
   display: inline-block;
@@ -279,7 +256,6 @@ button:hover {
   background: #8E0000;
 }
 
-/* Botón pequeño con ícono (papelera del carrito) */
 .boton-icono {
   background: var(--blanco);
   border: 1px solid var(--rojo);
@@ -292,14 +268,12 @@ button:hover {
   background: #FADBD8;
 }
 
-/* Mensaje de confirmación que escribe el JavaScript (vacío = no se ve) */
 .mensaje {
   color: var(--verde);
   font-weight: bold;
   margin-bottom: 12px;
 }
 
-/* Mensaje de error que escribe el JavaScript (vacío = no se ve) */
 .error {
   color: var(--rojo);
   font-weight: bold;
@@ -318,7 +292,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ---------- 8. Tablas ---------- */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -342,17 +315,14 @@ th {
   text-align: right;
 }
 
-/* Texto que va justo debajo de una tabla */
 table + p {
   margin-top: 10px;
 }
 
-/* Campos numéricos dentro de una tabla (cantidades, precio, stock) */
 td input[type="number"] {
   width: 90px;
 }
 
-/* Teléfono y lista de roles dentro de una tabla: solo el ancho necesario */
 td input[type="tel"] {
   width: 120px;
 }
@@ -365,7 +335,6 @@ td input[type="email"] {
   min-width: 270px;
 }
 
-/* Título de una tabla con un botón a la derecha */
 .encabezado-tabla {
   display: flex;
   justify-content: space-between;
@@ -373,7 +342,6 @@ td input[type="email"] {
   margin-bottom: 12px;
 }
 
-/* Botones de una fila de tabla, uno al lado del otro */
 .acciones {
   white-space: nowrap;
 }
@@ -382,14 +350,12 @@ td input[type="email"] {
   display: inline;
 }
 
-/* Fila de totales */
 .total td {
   font-weight: bold;
   font-size: 16px;
   color: var(--naranja);
 }
 
-/* ---------- 9. Estados del pedido (RN-20) ---------- */
 .estado {
   display: inline-block;
   padding: 2px 10px;
@@ -406,11 +372,9 @@ td input[type="email"] {
 .entregado      { background: #D9EAD3; color: #345621; }
 .cancelado      { background: #FADBD8; color: var(--rojo); }
 
-/* Estado activo / inactivo de un producto */
 .activo-txt   { color: var(--verde); font-weight: bold; }
 .inactivo-txt { color: var(--rojo); font-weight: bold; }
 
-/* ---------- 10. Catálogo del cliente ---------- */
 .grid-productos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -424,17 +388,14 @@ td input[type="email"] {
   padding: 14px;
 }
 
-/* El botón "Agregar" del catálogo va en verde */
 .producto button {
   background: var(--verde);
 }
 
-/* Producto sin stock: botón gris y desactivado */
 .producto button:disabled {
   background: #BDBDBD;
 }
 
-/* Venta en mostrador: tarjetas más chicas para ver más productos a la vez */
 .compacto {
   grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
   gap: 12px;
@@ -444,7 +405,6 @@ td input[type="email"] {
   height: 110px;
 }
 
-/* Foto real del producto: llena el recuadro sin deformarse */
 img.foto {
   width: 100%;
   object-fit: cover;
@@ -452,14 +412,12 @@ img.foto {
   display: block;
 }
 
-/* Panel que se queda visible al bajar por la página */
 .fijo {
   position: sticky;
   top: 16px;
   align-self: start;
 }
 
-/* Recuadro que reemplaza a la foto del producto */
 .foto {
   background: #EEF1F5;
   border: 1px dashed var(--borde);
@@ -499,7 +457,6 @@ img.foto {
   width: 70px;
 }
 
-/* ---------- 11. Tarjetas de indicadores (KPI) ---------- */
 .kpis {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -526,9 +483,6 @@ img.foto {
   color: var(--azul-oscuro);
 }
 
-/* ---------- 12. Gráficos de barras hechos solo con CSS ----------
-   Cada barra es un <div> cuyo ancho (width) se escribe en el HTML
-   como porcentaje del valor más alto de la serie.                 */
 .grafico .fila {
   display: grid;
   grid-template-columns: 50px 1fr 70px;
@@ -550,7 +504,6 @@ img.foto {
   border-radius: 4px;
 }
 
-/* ---------- 13. Línea de tiempo del seguimiento ---------- */
 .linea-tiempo {
   list-style: none;
   border-left: 3px solid var(--borde);
@@ -563,13 +516,11 @@ img.foto {
   color: var(--gris);
 }
 
-/* Paso ya cumplido */
 .linea-tiempo li.hecho {
   color: var(--naranja);
   font-weight: bold;
 }
 
-/* Pedido desplegable en "Mis pedidos" (etiqueta <details> de HTML) */
 details {
   background: var(--blanco);
   border: 1px solid var(--borde);
@@ -584,7 +535,6 @@ summary {
   color: var(--azul-oscuro);
 }
 
-/* ---------- 14. Página de inicio y login ---------- */
 .fondo-acceso {
   background: var(--fondo);
   min-height: 100vh;
@@ -625,7 +575,6 @@ summary {
   font-size: 14px;
 }
 
-/* ---------- 15. Promociones y contacto ---------- */
 .promo {
   background: #FCE4D6;
   border: 1px solid var(--naranja);
@@ -639,7 +588,6 @@ summary {
   color: var(--naranja);
 }
 
-/* ---------- 16. Pantallas pequeñas (celular) ---------- */
 @media (max-width: 700px) {
   .dos-columnas {
     grid-template-columns: 1fr;
@@ -649,7 +597,6 @@ summary {
     padding: 12px 16px;
   }
 
-  /* Las tablas anchas se desplazan dentro de su caja */
   .tabla-scroll {
     overflow-x: auto;
   }
